@@ -1,0 +1,166 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f5f5f5;
+    text-align: center;
+}
+
+h1 {
+    margin: 30px; /* Supprimer les marges pour le titre */
+    font-size: 2em; /* Taille du titre ajustée */
+}
+
+#search-input {
+    margin: 13px 1% 0px 10px;
+    width: 200px;
+    height: 16px;
+    padding: 5px; /* Ajouter un padding pour le confort de saisie */
+}
+
+.recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.recipe-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    position: relative;
+}
+
+.recipe-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.recipe-card img:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.card-content {
+    padding: 16px;
+    padding-bottom: 40px; /* Ajouter de l'espace en bas pour les étoiles */
+    position: relative;
+    background-color: white;
+}
+
+.recipe-card h2 {
+    font-size: 1.25em;
+    margin: 0;
+    margin-bottom: 8px;
+}
+
+.recipe-card p {
+    font-size: 1em;
+    margin: 0;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.rating {
+    position: absolute;
+    bottom: 10px; /* Ajuster l'espace en bas pour que les étoiles ne se chevauchent pas avec le texte */
+    left: 16px;
+    right: 16px;
+    display: flex;
+    font-size: 1.3em;
+    color: #ffcc00;
+    cursor: pointer;
+}
+
+.star {
+    display: inline-block;
+    font-size: 1.4em;
+    color: #ddd; /* Couleur des étoiles non sélectionnées */
+    cursor: pointer;
+  transition: color 0.2s;
+}
+
+.star.filled {
+    color: #ffcc00; /* Couleur des étoiles sélectionnées */
+}
+
+.rating-text {
+    font-size: 0.75em;
+    color: #555;
+    position: absolute;
+    right: 0;
+    bottom: 8px;
+}
+
+.divider {
+    width: 80%;
+    height: 0.5px;
+    background-color: black;
+    margin: 0 10%;
+}
+
+.sort-options {
+    margin-bottom: 10px;
+    margin-top: 5px;
+  max-width: 1200px;
+    margin: 0 auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+}
+
+.sort-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espace entre le label et le sélecteur */
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px 10px;
+    background-color: white;
+  margin-top: 13px;
+  margin-left: 3px;
+}
+
+#sort-criteria {
+    margin-left: 5px;
+  margin-right: -5px;
+    padding: 5px;
+    font-size: 0.9em;
+  border: none;
+  background-color: white;
+  height: 30px;
+  border-radius: 5px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.trier {
+  padding: 5.6px;
+  margin-right: -10px;
+  font-size: 15px;
+}
+
+.select {
+  display: flex;
+  align-items: center;
+  margin: -5px;
+  background-color: white;
+  height: 30px;
+}
+
+logo {
+  height: 30px;
+}
