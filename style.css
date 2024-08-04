@@ -7,6 +7,10 @@ body {
     text-align: center;
 }
 
+.header {
+    background-color: rgba(200,0,0,0.3);
+}
+
 h1 {
     margin: 30px; /* Supprimer les marges pour le titre */
     font-size: 2em; /* Taille du titre ajustée */
