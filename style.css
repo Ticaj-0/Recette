@@ -171,51 +171,24 @@ a {
 
 @media (max-width: 768px) {
     .logo {
-        height: 110px;
+        height: 120px;
     }
 
     .sort-options {
-        flex-direction: column;
+        flex-direction: row;
         align-items: flex-start;
     }
 
     #search-input {
-        width: 60%;
+        width: 50%;
     }
 
     .sort-container {
-        width: 50%;
+        width: 38%;
         justify-content: space-between;
+      margin-left: 3%;
     }
 }
 
 @media (max-width: 480px) {
-    .recipe-card img {
-        height: 150px;
-    }
-
-    .card-content {
-        padding: 10px;
-    }
-
-    .recipe-card h2 {
-        font-size: 1em;
-    }
-
-    .recipe-card p {
-        font-size: 0.875em;
-    }
-
-    .rating {
-        font-size: 1em;
-        margin: 5px;
-    }
-
-    .star {
-        font-size: 1.2em;
-    }
-
-    .rating-text {
-        font-size: 0.625em;
-    }
 }
