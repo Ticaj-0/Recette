@@ -171,7 +171,7 @@ a {
 
 @media (max-width: 768px) {
     .logo {
-        height: 100px;
+        height: 110px;
     }
 
     .sort-options {
@@ -180,11 +180,11 @@ a {
     }
 
     #search-input {
-        width: 100%;
+        width: 80%;
     }
 
     .sort-container {
-        width: 100%;
+        width: 80%;
         justify-content: space-between;
     }
 }
