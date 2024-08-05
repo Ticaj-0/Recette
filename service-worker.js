@@ -1,10 +1,10 @@
 const CACHE_NAME = 'recettes-cache-v1';
 const urlsToCache = [
   '/',
-  '/index.html',
-  '/styles.css',
-  '/scripts.js',
-  '/https://github.com/Ticaj-0/Recette/blob/main/logo%20carr%C3%A9.png?raw=true',
+  './index.html',
+  './styles.css',
+  './scripts.js',
+  './https://github.com/Ticaj-0/Recette/blob/main/logo%20carr%C3%A9.png?raw=true',
 ];
 
 // Installer le service worker et mettre en cache les ressources
