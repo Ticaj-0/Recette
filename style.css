@@ -180,11 +180,11 @@ a {
     }
 
     #search-input {
-        width: 80%;
+        width: 60%;
     }
 
     .sort-container {
-        width: 80%;
+        width: 50%;
         justify-content: space-between;
     }
 }
