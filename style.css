@@ -208,6 +208,7 @@ a {
 
     .rating {
         font-size: 1em;
+        margin: 5px;
     }
 
     .star {
