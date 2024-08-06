@@ -40,6 +40,7 @@ h1 {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: left;
     position: relative;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .recipe-card img {
@@ -47,7 +48,6 @@ h1 {
     height: 250px;
     object-fit: cover;
     transition: transform 0.3s;
-    -webkit-tap-highlight-color: transparent;
 }
 
 .recipe-card img:hover {
