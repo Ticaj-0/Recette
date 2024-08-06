@@ -97,6 +97,10 @@ h1 {
     color: #ffcc00; /* Couleur des étoiles sélectionnées */
 }
 
+.star:focus {
+    outline: none;
+}
+
 .rating-text {
     font-size: 0.75em;
     color: #555;
