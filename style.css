@@ -30,6 +30,7 @@ h1 {
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .recipe-card {
@@ -48,6 +49,7 @@ h1 {
     height: 250px;
     object-fit: cover;
     transition: transform 0.3s;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .recipe-card img:hover {
@@ -67,6 +69,7 @@ h1 {
     font-size: 1.25em;
     margin: 0;
     margin-bottom: 8px;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .recipe-card p {
