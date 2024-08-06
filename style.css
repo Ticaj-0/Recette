@@ -85,6 +85,10 @@ h1 {
     cursor: pointer;
 }
 
+.rating:focus {
+    outline: none;
+}
+
 .star {
     display: inline-block;
     font-size: 1.4em;
@@ -95,10 +99,6 @@ h1 {
 
 .star.filled {
     color: #ffcc00; /* Couleur des étoiles sélectionnées */
-}
-
-.star:focus {
-    outline: none;
 }
 
 .rating-text {
