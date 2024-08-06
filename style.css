@@ -83,10 +83,7 @@ h1 {
     font-size: 1.3em;
     color: #ffcc00;
     cursor: pointer;
-}
-
-.rating:focus {
-    outline: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .star {
@@ -99,10 +96,6 @@ h1 {
 
 .star.filled {
     color: #ffcc00; /* Couleur des étoiles sélectionnées */
-}
-
-.star:focus {
-    outline: none;
 }
 
 .rating-text {
