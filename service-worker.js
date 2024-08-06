@@ -2,7 +2,7 @@ const CACHE_NAME = 'recettes-cache-v1';
 const urlsToCache = [
   '/Recette/index.html',
   '/Recette/styles.css',
-  '/Recette/scripts.js',
+  '/Recette/script.js',
   'https://github.com/Ticaj-0/Recette/blob/main/logo%20d%C3%A9tour%C3%A9.png?raw=true',
 ];
 
