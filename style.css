@@ -213,6 +213,7 @@ footer {
 
 #installButton {
   cursor: pointer;
+  height: 25px;
   padding: 5px;
   background-color: rgba(245,244,242,255);
   border: 1px solid rgba(0,0,0,0.4);
