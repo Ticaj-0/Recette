@@ -4,7 +4,6 @@ const urlsToCache = [
   '/Recette/index.html',
   '/Recette/styles.css',
   '/Recette/script.js',
-  'https://github.com/Ticaj-0/Recette/blob/main/logo%20d%C3%A9tour%C3%A9.png?raw=true',
 ];
 
 // Installer le service worker et mettre en cache les ressources
