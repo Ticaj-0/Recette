@@ -1,5 +1,6 @@
 const CACHE_NAME = 'recettes-cache-v1';
 const urlsToCache = [
+  '/',
   '/Recette/index.html',
   '/Recette/styles.css',
   '/Recette/script.js',
