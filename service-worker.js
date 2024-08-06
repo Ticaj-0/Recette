@@ -1,9 +1,9 @@
 const CACHE_NAME = 'recettes-cache-v1';
 const urlsToCache = [
   '/',
-  'index.html',
-  'style.css',
-  'script.js',
+  '/index.html',
+  '/style.css',
+  '/script.js',
 ];
 
 // Installer le service worker et mettre en cache les ressources
