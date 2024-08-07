@@ -43,9 +43,10 @@ self.addEventListener('fetch', event => {
         }
         return fetch(event.request).then(networkResponse => {
           // Si la ressource est trouvée sur le réseau, la mettre en cache pour les futures requêtes
-          if (networkResponse && networkResponse.status === 200) {
+          if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
+            const responseToCache = networkResponse.clone();
             caches.open(CACHE_NAME).then(cache => {
-              cache.put(event.request, networkResponse.clone());
+              cache.put(event.request, responseToCache);
             });
           }
           return networkResponse;
@@ -56,4 +57,5 @@ self.addEventListener('fetch', event => {
       })
   );
 });
+
 
