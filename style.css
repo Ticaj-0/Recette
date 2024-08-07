@@ -198,6 +198,38 @@ a {
 }
 
 @media (max-width: 480px) {
+    .recipe-card img {
+        height: 200px;
+    }
+
+    .card-content {
+        padding: 10px;
+    }
+
+    .recipe-card h2 {
+        font-size: 1.15em;
+    }
+
+    .recipe-card p {
+        font-size: 0.95em;
+    }
+  
+    .recipe-card {
+        height: 315px;
+  }
+
+    .rating {
+        font-size: 1em;
+        margin-bottom: -21px;
+    }
+
+    .star {
+        font-size: 1.5em;
+    }
+
+    .rating-text {
+        font-size: 0.95em;
+    }
 }
 
 footer {
