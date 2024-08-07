@@ -1,6 +1,6 @@
 {
   "name": "Les recettes de Ticaj",
-  "short_name": "Recettes",
+  "short_name": "Recettes de Ticaj",
   "description": "Une collection de recettes délicieuses.",
   "start_url": "/index.html",
   "display": "standalone",
