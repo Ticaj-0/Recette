@@ -17,7 +17,6 @@ self.addEventListener('install', event => {
   );
 });
 
-
 // Activer le service worker et nettoyer les anciens caches
 self.addEventListener('activate', event => {
   const cacheWhitelist = [CACHE_NAME];
@@ -42,7 +41,19 @@ self.addEventListener('fetch', event => {
         if (response) {
           return response;
         }
-        return fetch(event.request);
+        return fetch(event.request).then(networkResponse => {
+          // Si la ressource est trouvée sur le réseau, la mettre en cache pour les futures requêtes
+          if (networkResponse && networkResponse.status === 200) {
+            caches.open(CACHE_NAME).then(cache => {
+              cache.put(event.request, networkResponse.clone());
+            });
+          }
+          return networkResponse;
+        }).catch(error => {
+          console.error('Fetching failed:', error);
+          throw error;
+        });
       })
   );
 });
+
