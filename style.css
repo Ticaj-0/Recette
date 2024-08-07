@@ -216,8 +216,6 @@ a {
     }
   
     .recipe-card {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(315px, 400px));
   }
 
     .rating {
