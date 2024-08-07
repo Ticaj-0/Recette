@@ -2,7 +2,7 @@
   "name": "Les recettes de Ticaj",
   "short_name": "Recettes de Ticaj",
   "description": "Une collection de recettes délicieuses.",
-  "start_url": "/index.html",
+  "start_url": "/Recette/index.html",
   "display": "standalone",
   "background_color": "rgba(245,244,242,255)",
   "theme_color": "rgba(245,244,242,255)",
