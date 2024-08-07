@@ -1,6 +1,6 @@
 {
-  "name": "Les recettes de Ticaj",
-  "short_name": "Recettes de Ticaj",
+  "name": "Les Recettes de Ticaj",
+  "short_name": "Les Recettes de Ticaj",
   "description": "Une collection de recettes délicieuses.",
   "start_url": "/Recette/index.html",
   "display": "standalone",
@@ -9,7 +9,7 @@
   "icons": [
     {
       "src": "https://github.com/Ticaj-0/Recette/blob/main/logo%20d%C3%A9tour%C3%A9.png?raw=true",
-      "sizes": "192x192",
+      "sizes": "200x200",
       "type": "image/png"
     },
     {
