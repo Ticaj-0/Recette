@@ -3,7 +3,7 @@ const urlsToCache = [
   'https://ticaj-0.github.io/Recette/index.html',
   'https://ticaj-0.github.io/Recette/script.js',
   'https://ticaj-0.github.io/Recette/style.css',
-  'https://ticaj-0.github.io/Recette-1/',
+  'https://ticaj-0.github.io/Recette/Recette-1/',
 ];
 
 // Installer le service worker et mettre en cache les ressources
