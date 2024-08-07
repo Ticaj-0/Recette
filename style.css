@@ -9,6 +9,7 @@ body {
 
 .header {
     background-color: rgba(245,244,242,255);
+    padding: 5px;
 }
 
 h1 {
@@ -173,7 +174,6 @@ a {
 
 .logo {
   height: 175px;
-  margin: 5px;
 }
 
 @media (max-width: 768px) {
