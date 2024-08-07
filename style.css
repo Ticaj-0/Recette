@@ -221,6 +221,7 @@ a {
     .rating {
         font-size: 1em;
         margin-bottom: -21px;
+        margin-left: -7px;
     }
 
     .star {
