@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateRecipeRating(recipe, ratingValue) {
         recipe.setAttribute('data-rating', ratingValue);
         updateStars(recipe.querySelector('.rating'), ratingValue);
-        localStorage.setItem(rating-${recipe.getAttribute('data-id')}, ratingValue);
+        localStorage.setItem(`rating-${recipe.getAttribute('data-id')}`, ratingValue);
     }
 
     function sortRecipes(criteria) {
@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded', function() {
             sortedRecipes = [...originalOrder];
         } else {
             sortedRecipes = [...recipesGrid.children].sort((a, b) => {
-                const aValue = parseInt(a.getAttribute(data-${criteria}), 10) || 0;
-                const bValue = parseInt(b.getAttribute(data-${criteria}), 10) || 0;
+                const aValue = parseInt(a.getAttribute(`data-${criteria}`), 10) || 0;
+                const bValue = parseInt(b.getAttribute(`data-${criteria}`), 10) || 0;
                 return criteria === 'rating' ? bValue - aValue : aValue - bValue;
             });
         }
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Initialize stars for each rating
             const recipe = rating.closest('.recipe-card');
-            const savedRating = localStorage.getItem(rating-${recipe.getAttribute('data-id')}) || rating.getAttribute('data-rating');
+            const savedRating = localStorage.getItem(`rating-${recipe.getAttribute('data-id')}`) || rating.getAttribute('data-rating');
             recipe.setAttribute('data-rating', savedRating);
             updateStars(rating, savedRating);
         });
@@ -124,3 +124,4 @@ window.addEventListener('beforeinstallprompt', (e) => {
         });
     });
 });
+
