@@ -5,7 +5,7 @@
   "start_url": "/index.html",
   "display": "standalone",
   "background_color": "rgba(245,244,242,255)",
-  "theme_color": "#000000",
+  "theme_color": "rgba(245,244,242,255)",
   "icons": [
     {
       "src": "https://github.com/Ticaj-0/Recette/blob/main/logo%20d%C3%A9tour%C3%A9.png?raw=true",
