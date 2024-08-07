@@ -173,6 +173,7 @@ a {
 
 .logo {
   height: 175px;
+  margin: 5px;
 }
 
 @media (max-width: 768px) {
