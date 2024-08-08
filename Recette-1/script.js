@@ -1,31 +1,31 @@
 document.addEventListener('DOMContentLoaded', function() {
     const stars = document.querySelectorAll('.star');
     const pageId = 'recette-1'; // Remplacez par l'identifiant unique de chaque page
-const savedRating = localStorage.getItem(`rating-${pageId}`);
-if (savedRating) {
-    updateStars(savedRating);
-}
-stars.forEach(star => {
-    star.addEventListener('click', () => {
-        const value = star.getAttribute('data-value');
-        const currentRating = localStorage.getItem(`rating-${pageId}`);
-        if (currentRating === value) {
-            localStorage.removeItem(`rating-${pageId}`);
-            updateStars(0);
-        } else {
-            localStorage.setItem(`rating-${pageId}`, value);
+    const savedRating = localStorage.getItem(`rating-${pageId}`);
+    if (savedRating) {
+        updateStars(savedRating);
+    }
+    stars.forEach(star => {
+        star.addEventListener('click', () => {
+            const value = star.getAttribute('data-value');
+            const currentRating = localStorage.getItem(`rating-${pageId}`);
+            if (currentRating === value) {
+                localStorage.removeItem(`rating-${pageId}`);
+                updateStars(0);
+            } else {
+                localStorage.setItem(`rating-${pageId}`, value);
+                updateStars(value);
+            }
+        });
+        star.addEventListener('mouseover', () => {
+            const value = star.getAttribute('data-value');
             updateStars(value);
-        }
+        });
+        star.addEventListener('mouseout', () => {
+            const value = localStorage.getItem(`rating-${pageId}`) || 0;
+            updateStars(value);
+        });
     });
-    star.addEventListener('mouseover', () => {
-        const value = star.getAttribute('data-value');
-        updateStars(value);
-    });
-    star.addEventListener('mouseout', () => {
-        const value = localStorage.getItem(`rating-${pageId}`) || 0;
-        updateStars(value);
-    });
-});
 
     function updateStars(value) {
         stars.forEach(s => s.classList.remove('filled'));
