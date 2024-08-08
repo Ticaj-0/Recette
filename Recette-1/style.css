@@ -105,13 +105,10 @@ h1 {
     margin: 10px 0;
 }
 
-.button {
+.favorite-button {
     padding: 10px 20px;
     border: none;
     cursor: pointer;
-}
-
-.button.cook {
     background-color: red;
     color: white;
 }
