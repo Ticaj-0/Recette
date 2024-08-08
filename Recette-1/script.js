@@ -1,44 +1,139 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const stars = document.querySelectorAll('.star');
-    const savedRating = localStorage.getItem('rating');
+    const recipesGrid = document.querySelector('.recipes-grid');
+    const recipes = Array.from(recipesGrid ? recipesGrid.children : []);
+    const originalOrder = recipes.map(recipe => recipe);
 
-    if (savedRating) {
-        updateStars(savedRating);
-    }
-
-    stars.forEach(star => {
-        star.addEventListener('click', () => {
-            const value = star.getAttribute('data-value');
-            const currentRating = localStorage.getItem('rating');
-
-            // If the clicked star is already the rating, reset the rating
-            if (currentRating === value) {
-                localStorage.removeItem('rating');
-                updateStars(0);
+    function updateStars(ratingElement, value) {
+        const stars = ratingElement.querySelectorAll('.star');
+        stars.forEach(star => {
+            if (parseInt(star.getAttribute('data-value'), 10) <= parseInt(value, 10)) {
+                star.classList.add('filled');
             } else {
-                localStorage.setItem('rating', value);
-                updateStars(value);
+                star.classList.remove('filled');
             }
         });
+    }
 
-        star.addEventListener('mouseover', () => {
-            const value = star.getAttribute('data-value');
-            updateStars(value);
+    function updateRecipeRating(recipe, ratingValue) {
+        recipe.setAttribute('data-rating', ratingValue);
+        updateStars(recipe.querySelector('.rating'), ratingValue);
+        localStorage.setItem(`rating-${recipe.getAttribute('data-id')}`, ratingValue);
+
+        // Synchronize rating on all pages
+        synchronizeRatings(recipe.getAttribute('data-id'), ratingValue);
+    }
+
+    function synchronizeRatings(recipeId, ratingValue) {
+        // Update all instances of the recipe with the same ID
+        document.querySelectorAll(`.recipe-card[data-id='${recipeId}']`).forEach(recipe => {
+            recipe.setAttribute('data-rating', ratingValue);
+            updateStars(recipe.querySelector('.rating'), ratingValue);
         });
+    }
 
-        star.addEventListener('mouseout', () => {
-            const value = localStorage.getItem('rating') || 0;
-            updateStars(value);
+    function sortRecipes(criteria) {
+        let sortedRecipes;
+
+        if (criteria === 'default') {
+            sortedRecipes = [...originalOrder];
+        } else {
+            sortedRecipes = [...recipesGrid.children].sort((a, b) => {
+                const aValue = parseInt(a.getAttribute(`data-${criteria}`), 10) || 0;
+                const bValue = parseInt(b.getAttribute(`data-${criteria}`), 10) || 0;
+                return criteria === 'rating' ? bValue - aValue : aValue - bValue;
+            });
+        }
+
+        recipesGrid.innerHTML = '';
+        sortedRecipes.forEach(recipe => recipesGrid.appendChild(recipe));
+    }
+
+    function filterRecipes(term) {
+        recipes.forEach(recipe => {
+            const title = recipe.querySelector('h2').textContent.toLowerCase();
+            const description = recipe.querySelector('p').textContent.toLowerCase();
+
+            recipe.style.display = (title.includes(term) || description.includes(term)) ? '' : 'none';
+        });
+    }
+
+    function setupStars() {
+        document.querySelectorAll('.rating').forEach(rating => {
+            const stars = rating.querySelectorAll('.star');
+            stars.forEach(star => {
+                star.addEventListener('click', () => {
+                    const value = star.getAttribute('data-value');
+                    const recipe = rating.closest('.recipe-card');
+                    const currentRating = recipe.getAttribute('data-rating');
+
+                    // Update the rating and sort recipes
+                    updateRecipeRating(recipe, value === currentRating ? '0' : value);
+                    sortRecipes(document.getElementById('sort-criteria').value);
+                });
+
+                star.addEventListener('mouseover', () => {
+                    // Highlight stars up to the hovered star
+                    updateStars(rating, star.getAttribute('data-value'));
+                });
+
+                star.addEventListener('mouseout', () => {
+                    // Restore stars to the current rating
+                    const recipe = rating.closest('.recipe-card');
+                    updateStars(rating, recipe.getAttribute('data-rating'));
+                });
+            });
+
+            // Initialize stars for each rating
+            const recipe = rating.closest('.recipe-card');
+            const savedRating = localStorage.getItem(`rating-${recipe.getAttribute('data-id')}`) || rating.getAttribute('data-rating');
+            recipe.setAttribute('data-rating', savedRating);
+            updateStars(rating, savedRating);
+        });
+    }
+
+    document.getElementById('sort-criteria')?.addEventListener('change', function() {
+        sortRecipes(this.value);
+    });
+
+    document.getElementById('search-input')?.addEventListener('input', function() {
+        filterRecipes(this.value.toLowerCase());
+    });
+
+    setupStars();
+    sortRecipes('default');
+
+    // Handle favorite buttons on all pages
+    document.querySelectorAll('.favorite-button').forEach(button => {
+        const recipeId = button.getAttribute('data-id');
+        const isFavorited = localStorage.getItem(`favorite-${recipeId}`) === 'true';
+        
+        // Apply favorite style if already in favorites
+        button.classList.toggle('favorited', isFavorited);
+
+        // Add click event to mark/unmark favorites
+        button.addEventListener('click', () => {
+            const isNowFavorited = !button.classList.contains('favorited');
+            button.classList.toggle('favorited', isNowFavorited);
+            localStorage.setItem(`favorite-${recipeId}`, isNowFavorited);
         });
     });
 
-    function updateStars(value) {
-        stars.forEach(s => s.classList.remove('filled'));
-        for (let i = 0; i < value; i++) {
-            stars[i].classList.add('filled');
-        }
+    const toggleFavoritesBtn = document.getElementById('toggle-favorites');
+    if (toggleFavoritesBtn) {
+        toggleFavoritesBtn.addEventListener('click', () => {
+            const showFavorites = !toggleFavoritesBtn.classList.contains('showing-all');
+            toggleFavoritesBtn.classList.toggle('showing-all', showFavorites);
+            
+            // Show or hide recipes based on favorites
+            document.querySelectorAll('.recipe-card').forEach(recipe => {
+                const recipeId = recipe.getAttribute('data-id');
+                const isFavorited = localStorage.getItem(`favorite-${recipeId}`) === 'true';
+                recipe.style.display = showFavorites && !isFavorited ? 'none' : '';
+            });
+        });
     }
 });
+
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
@@ -71,50 +166,4 @@ window.addEventListener('beforeinstallprompt', (e) => {
             deferredPrompt = null;
         });
     });
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Fonction pour mettre à jour l'état du bouton de favoris
-    function updateFavoriteButton(button, isFavorited) {
-        if (isFavorited) {
-            button.classList.add('favorited');
-            button.textContent = 'Enlever des favoris';
-        } else {
-            button.classList.remove('favorited');
-            button.textContent = 'Sur la liste de favoris';
-        }
-    }
-
-    // Sélection des boutons de favoris
-    const favoriteButtons = document.querySelectorAll('.favorite-button');
-
-    favoriteButtons.forEach(button => {
-        const recipeId = button.getAttribute('data-id');
-        const isFavorited = localStorage.getItem(`favorite-${recipeId}`) === 'true';
-        
-        // Met à jour le style du bouton en fonction de l'état des favoris
-        updateFavoriteButton(button, isFavorited);
-
-        // Ajout de l'événement de clic pour gérer les favoris
-        button.addEventListener('click', () => {
-            const isNowFavorited = !button.classList.contains('favorited');
-            localStorage.setItem(`favorite-${recipeId}`, isNowFavorited);
-            updateFavoriteButton(button, isNowFavorited);
-        });
-    });
-
-    // Gestion de l'affichage des favoris
-    const toggleFavoritesBtn = document.getElementById('toggle-favorites');
-    if (toggleFavoritesBtn) {
-        toggleFavoritesBtn.addEventListener('click', () => {
-            const showFavorites = !toggleFavoritesBtn.classList.contains('showing-all');
-            toggleFavoritesBtn.classList.toggle('showing-all', showFavorites);
-
-            document.querySelectorAll('.recipe-card').forEach(recipe => {
-                const recipeId = recipe.getAttribute('data-id');
-                const isFavorited = localStorage.getItem(`favorite-${recipeId}`) === 'true';
-                recipe.style.display = showFavorites && !isFavorited ? 'none' : '';
-            });
-        });
-    }
 });
