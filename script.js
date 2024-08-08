@@ -147,6 +147,23 @@ document.addEventListener('DOMContentLoaded', function() {
   const toggleFavoritesBtn = document.getElementById('toggle-favorites');
   if (toggleFavoritesBtn) {
     toggleFavoritesBtn.addEventListener('click', () => {
+      const showFavorites = !toggleFavoritesBtn.classList.contains('showing-all');
+      toggleFavoritesBtn.classList.toggle('showing-all', showFavorites);
+      
+      // Afficher ou masquer les recettes en fonction des favoris
+      document.querySelectorAll('.recette').forEach(recipe => {
+        const recipeId = recipe.querySelector('.favorite-button').getAttribute('data-id');
+        const isFavorited = localStorage.getItem(`favorite-${recipeId}`) === 'true';
+        recipe.style.display = showFavorites && !isFavorited ? 'none' : '';
+      });
+    });
+  }
+});
+
+
+  const toggleFavoritesBtn = document.getElementById('toggle-favorites');
+  if (toggleFavoritesBtn) {
+    toggleFavoritesBtn.addEventListener('click', () => {
       const showFavorites = toggleFavoritesBtn.textContent === 'Afficher les favoris';
       toggleFavoritesBtn.textContent = showFavorites ? 'Afficher tout' : 'Afficher les favoris';
       
