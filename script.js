@@ -125,3 +125,38 @@ window.addEventListener('beforeinstallprompt', (e) => {
     });
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+  // Sélection de tous les boutons de favoris sur toutes les pages
+  const favoriteButtons = document.querySelectorAll('.favorite-button');
+
+  favoriteButtons.forEach(button => {
+    const recipeId = button.getAttribute('data-id');
+    const isFavorited = localStorage.getItem(`favorite-${recipeId}`) === 'true';
+    
+    // Appliquer le style favori si déjà en favoris
+    button.classList.toggle('favorited', isFavorited);
+
+    // Ajouter l'événement de clic pour marquer/démarquer les favoris
+    button.addEventListener('click', () => {
+      const isNowFavorited = !button.classList.contains('favorited');
+      button.classList.toggle('favorited', isNowFavorited);
+      localStorage.setItem(`favorite-${recipeId}`, isNowFavorited);
+    });
+  });
+
+  const toggleFavoritesBtn = document.getElementById('toggle-favorites');
+  if (toggleFavoritesBtn) {
+    toggleFavoritesBtn.addEventListener('click', () => {
+      const showFavorites = toggleFavoritesBtn.textContent === 'Afficher les favoris';
+      toggleFavoritesBtn.textContent = showFavorites ? 'Afficher tout' : 'Afficher les favoris';
+      
+      // Afficher ou masquer les recettes en fonction des favoris
+      document.querySelectorAll('.recipe-card').forEach(recipe => {
+        const recipeId = recipe.getAttribute('data-id');
+        const isFavorited = localStorage.getItem(`favorite-${recipeId}`) === 'true';
+        recipe.style.display = showFavorites && !isFavorited ? 'none' : '';
+      });
+    });
+  }
+});
+
