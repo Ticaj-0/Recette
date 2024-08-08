@@ -113,7 +113,7 @@ h1 {
     color: white;
 }
 
-.favorite-button.added {
+.favorite-button.favorited {
   background-color: rgb(216, 177, 82);
 }
 
