@@ -307,3 +307,24 @@ footer {
   display: flex;
   item-align: center;
 }
+
+#toggle-favorites {
+  height: 30px;
+  border: none;
+  background-color: transparent;
+  margin-top: 5px;
+  margin-right: -8px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#toggle-favorites img:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.favoris-img {
+  height: 35px;
+  filter: brightness(1.2);
+  transition: transform 0.3s;
+}
