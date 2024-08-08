@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const stars = document.querySelectorAll('.star');
     const pageId = 'recette-1'; // Remplacez par l'identifiant unique de chaque page
 const savedRating = localStorage.getItem(`rating-${pageId}`);
 if (savedRating) {
