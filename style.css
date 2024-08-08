@@ -35,6 +35,7 @@ h1 {
 }
 
 .recipe-card {
+    max-width: 500px;
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 8px;
