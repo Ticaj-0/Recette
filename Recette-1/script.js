@@ -99,8 +99,8 @@ document.addEventListener('DOMContentLoaded', function() {
       toggleFavoritesBtn.classList.toggle('showing-all', showFavorites);
       
       // Afficher ou masquer les recettes en fonction des favoris
-      document.querySelectorAll('.recette').forEach(recipe => {
-        const recipeId = recipe.querySelector('.favorite-button').getAttribute('data-id');
+      document.querySelectorAll('.recipe-card').forEach(recipe => {
+        const recipeId = recipe.getAttribute('data-id');
         const isFavorited = localStorage.getItem(`favorite-${recipeId}`) === 'true';
         recipe.style.display = showFavorites && !isFavorited ? 'none' : '';
       });
