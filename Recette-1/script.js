@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Fonction pour mettre à jour les étoiles
     function updateStars(stars, value) {
         stars.forEach(s => s.classList.remove('filled'));
         for (let i = 0; i < value; i++) {
@@ -7,23 +6,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Gestion des étoiles pour une recette spécifique
     function setupRating(recipeId) {
-        const stars = document.querySelectorAll('.star');
-        const savedRating = localStorage.getItem(rating-${recipeId}) || 0;
+        const stars = document.querySelectorAll(`.recipe-card[data-id='${recipeId}'] .star`);
+        const savedRating = localStorage.getItem(`rating-${recipeId}`) || 0;
 
         updateStars(stars, savedRating);
 
         stars.forEach(star => {
             star.addEventListener('click', () => {
                 const value = star.getAttribute('data-value');
-                const currentRating = localStorage.getItem(rating-${recipeId});
+                const currentRating = localStorage.getItem(`rating-${recipeId}`);
 
                 if (currentRating === value) {
-                    localStorage.removeItem(rating-${recipeId});
+                    localStorage.removeItem(`rating-${recipeId}`);
                     updateStars(stars, 0);
                 } else {
-                    localStorage.setItem(rating-${recipeId}, value);
+                    localStorage.setItem(`rating-${recipeId}`, value);
                     updateStars(stars, value);
                 }
             });
@@ -34,25 +32,22 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             star.addEventListener('mouseout', () => {
-                const value = localStorage.getItem(rating-${recipeId}) || 0;
+                const value = localStorage.getItem(`rating-${recipeId}`) || 0;
                 updateStars(stars, value);
             });
         });
     }
 
-    // Initialise le système de notation pour la page principale
     document.querySelectorAll('.recipe-card').forEach(recipe => {
         const recipeId = recipe.getAttribute('data-id');
         setupRating(recipeId);
     });
 
-    // Initialise le système de notation pour la page de description
-    const descriptionRecipeId = document.querySelector('.recipe-header').getAttribute('data-id');
+    const descriptionRecipeId = document.querySelector('.recipe-header')?.getAttribute('data-id');
     if (descriptionRecipeId) {
         setupRating(descriptionRecipeId);
     }
 
-    // Gestion du bouton de favoris
     function updateFavoriteButton(button, isFavorited) {
         if (isFavorited) {
             button.classList.add('favorited');
@@ -67,17 +62,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     favoriteButtons.forEach(button => {
         const recipeId = button.getAttribute('data-id');
-        const isFavorited = localStorage.getItem(favorite-${recipeId}) === 'true';
+        const isFavorited = localStorage.getItem(`favorite-${recipeId}`) === 'true';
         updateFavoriteButton(button, isFavorited);
 
         button.addEventListener('click', () => {
             const isNowFavorited = !button.classList.contains('favorited');
-            localStorage.setItem(favorite-${recipeId}, isNowFavorited);
+            localStorage.setItem(`favorite-${recipeId}`, isNowFavorited);
             updateFavoriteButton(button, isNowFavorited);
         });
     });
 
-    // Gestion de l'affichage des favoris
     const toggleFavoritesBtn = document.getElementById('toggle-favorites');
     if (toggleFavoritesBtn) {
         toggleFavoritesBtn.addEventListener('click', () => {
@@ -86,14 +80,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
             document.querySelectorAll('.recipe-card').forEach(recipe => {
                 const recipeId = recipe.getAttribute('data-id');
-                const isFavorited = localStorage.getItem(favorite-${recipeId}) === 'true';
+                const isFavorited = localStorage.getItem(`favorite-${recipeId}`) === 'true';
                 recipe.style.display = showFavorites && !isFavorited ? 'none' : '';
             });
         });
     }
 });
 
-// Enregistrement du service worker
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
         navigator.serviceWorker.register('https://ticaj-0.github.io/Recette/service-worker.js').then(function(registration) {
@@ -104,7 +97,6 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-// Gestion de l'installation de l'app
 let deferredPrompt;
 
 window.addEventListener('beforeinstallprompt', (e) => {
