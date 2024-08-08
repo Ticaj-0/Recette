@@ -107,3 +107,17 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  const favoriteButton = document.getElementById('favorite-button');
+
+  favoriteButton.addEventListener('click', () => {
+    if (favoriteButton.classList.contains('added')) {
+      favoriteButton.classList.remove('added');
+      favoriteButton.textContent = 'Ajouter aux favoris';
+    } else {
+      favoriteButton.classList.add('added');
+      favoriteButton.textContent = 'Enlever des favoris';
+    }
+  });
+});
