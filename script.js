@@ -159,21 +159,3 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
-
-
-  const toggleFavoritesBtn = document.getElementById('toggle-favorites');
-  if (toggleFavoritesBtn) {
-    toggleFavoritesBtn.addEventListener('click', () => {
-      const showFavorites = toggleFavoritesBtn.textContent === 'Afficher les favoris';
-      toggleFavoritesBtn.textContent = showFavorites ? 'Afficher tout' : 'Afficher les favoris';
-      
-      // Afficher ou masquer les recettes en fonction des favoris
-      document.querySelectorAll('.recipe-card').forEach(recipe => {
-        const recipeId = recipe.getAttribute('data-id');
-        const isFavorited = localStorage.getItem(`favorite-${recipeId}`) === 'true';
-        recipe.style.display = showFavorites && !isFavorited ? 'none' : '';
-      });
-    });
-  }
-});
-
