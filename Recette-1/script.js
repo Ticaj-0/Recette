@@ -74,51 +74,47 @@ window.addEventListener('beforeinstallprompt', (e) => {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-  // Sélection de tous les boutons de favoris sur toutes les pages
-  const favoriteButtons = document.querySelectorAll('.favorite-button');
-
-  favoriteButtons.forEach(button => {
-    const recipeId = button.getAttribute('data-id');
-    const isFavorited = localStorage.getItem(`favorite-${recipeId}`) === 'true';
-    
-    // Appliquer le style favori si déjà en favoris
-    button.classList.toggle('favorited', isFavorited);
-
-    // Ajouter l'événement de clic pour marquer/démarquer les favoris
-    button.addEventListener('click', () => {
-      const isNowFavorited = !button.classList.contains('favorited');
-      button.classList.toggle('favorited', isNowFavorited);
-      localStorage.setItem(`favorite-${recipeId}`, isNowFavorited);
-    });
-  });
-
-  const toggleFavoritesBtn = document.getElementById('toggle-favorites');
-  if (toggleFavoritesBtn) {
-    toggleFavoritesBtn.addEventListener('click', () => {
-      const showFavorites = !toggleFavoritesBtn.classList.contains('showing-all');
-      toggleFavoritesBtn.classList.toggle('showing-all', showFavorites);
-      
-      // Afficher ou masquer les recettes en fonction des favoris
-      document.querySelectorAll('.recipe-card').forEach(recipe => {
-        const recipeId = recipe.getAttribute('data-id');
-        const isFavorited = localStorage.getItem(`favorite-${recipeId}`) === 'true';
-        recipe.style.display = showFavorites && !isFavorited ? 'none' : '';
-      });
-    });
-  }
-});
-
-
-document.addEventListener('DOMContentLoaded', (event) => {
-  const favoriteButton = document.getElementById('favorite-button');
-
-  favoriteButton.addEventListener('click', () => {
-    if (favoriteButton.classList.contains('added')) {
-      favoriteButton.classList.remove('added');
-      favoriteButton.textContent = 'Ajouter aux favoris';
-    } else {
-      favoriteButton.classList.add('added');
-      favoriteButton.textContent = 'Enlever des favoris';
+    // Fonction pour mettre à jour l'état du bouton de favoris
+    function updateFavoriteButton(button, isFavorited) {
+        if (isFavorited) {
+            button.classList.add('favorited');
+            button.textContent = 'Enlever des favoris';
+        } else {
+            button.classList.remove('favorited');
+            button.textContent = 'Sur la liste de favoris';
+        }
     }
-  });
+
+    // Sélection des boutons de favoris
+    const favoriteButtons = document.querySelectorAll('.favorite-button');
+
+    favoriteButtons.forEach(button => {
+        const recipeId = button.getAttribute('data-id');
+        const isFavorited = localStorage.getItem(`favorite-${recipeId}`) === 'true';
+        
+        // Met à jour le style du bouton en fonction de l'état des favoris
+        updateFavoriteButton(button, isFavorited);
+
+        // Ajout de l'événement de clic pour gérer les favoris
+        button.addEventListener('click', () => {
+            const isNowFavorited = !button.classList.contains('favorited');
+            localStorage.setItem(`favorite-${recipeId}`, isNowFavorited);
+            updateFavoriteButton(button, isNowFavorited);
+        });
+    });
+
+    // Gestion de l'affichage des favoris
+    const toggleFavoritesBtn = document.getElementById('toggle-favorites');
+    if (toggleFavoritesBtn) {
+        toggleFavoritesBtn.addEventListener('click', () => {
+            const showFavorites = !toggleFavoritesBtn.classList.contains('showing-all');
+            toggleFavoritesBtn.classList.toggle('showing-all', showFavorites);
+
+            document.querySelectorAll('.recipe-card').forEach(recipe => {
+                const recipeId = recipe.getAttribute('data-id');
+                const isFavorited = localStorage.getItem(`favorite-${recipeId}`) === 'true';
+                recipe.style.display = showFavorites && !isFavorited ? 'none' : '';
+            });
+        });
+    }
 });
