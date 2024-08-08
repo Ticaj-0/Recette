@@ -113,6 +113,10 @@ h1 {
     color: white;
 }
 
+.favorite-button.added {
+  background-color: rgb(216, 177, 82);
+}
+
 .popup {
     display: none;
     position: fixed;
