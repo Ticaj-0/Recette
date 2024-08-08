@@ -76,6 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setupStars();
     sortRecipes('default');
 });
+
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
     navigator.serviceWorker.register('/Recette/service-worker.js').then(function(registration) {
@@ -105,6 +106,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
         });
     });
 });
+
 document.addEventListener('DOMContentLoaded', function() {
   // Sélection de tous les boutons de favoris sur toutes les pages
   const favoriteButtons = document.querySelectorAll('.favorite-button');
