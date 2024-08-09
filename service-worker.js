@@ -2,7 +2,7 @@ const CACHE_NAME = 'recettes-cache-v1';
 const urlsToCache = [
   '/Recette/index.html',
   '/Recette/script.js',
-  '7Recette/style.css',
+  '/Recette/style.css',
   '/Recette/Recette-1/',
   '/Recette/blob/main/logo%20carr%C3%A9.png?raw=true',
   '/Recette/blob/main/logo.png?raw=true',
