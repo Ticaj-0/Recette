@@ -4,8 +4,15 @@ const urlsToCache = [
   '/Recette/script.js',
   '/Recette/style.css',
   '/Recette/Recette-1/',
-  '/Recette/blob/main/logo%20carr%C3%A9.png?raw=true',
-  '/Recette/blob/main/logo.png?raw=true',
+  '/Recette/Recette-2/',
+  '/Recette/Recette-3/',
+  '/Recette/Recette-4/',
+  '/Recette/Recette-5/',
+  '/Recette/Recette-6/',
+  '/Recette/Recette-7/',
+  '/Recette/Recette-8/',
+  '/Recette/logo.png',
+  '/Recette/logo carré.png',
 ];
 
 // Installer le service worker et mettre en cache les ressources
